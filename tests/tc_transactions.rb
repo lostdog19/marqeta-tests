@@ -24,7 +24,6 @@ class TransactionTests < TestBase
     response = Transactions::list_transactions({:user_token => user_token})
     response_body = JSON.parse(response.body) if response.body
 
-    pp response_body
     # Verify response
     assert_equal('200', response.code, 'Expected list_transactions to succeed')
     assert_equal(0, response_body['count'], 'Expected 0 transactions')
