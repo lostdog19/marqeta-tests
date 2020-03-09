@@ -20,6 +20,10 @@ To execute the tests from the command line and save the output in JUnit format (
 
 ## Structure
 
+**marqeta_api_data** - Files containing the API definitions used in the tests
+
+**tests** - Files containing the tests
+
 **auto_test.rb** - entry point to run all tests located in the **./tests** folder
 
 **Bugs.txt** - A collection of bugs located during test creation
@@ -34,7 +38,4 @@ To execute the tests from the command line and save the output in JUnit format (
 
 **test_base.rb** - A base class which all the test cases inherit from, in order to ensure common behavior.
 
-**marqeta_api_data** - Files containing the API definitions used in the tests
-
-**tests** - Files containing the tests
 
