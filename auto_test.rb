@@ -5,5 +5,5 @@ require "logger"
 $log = Logger.new(STDOUT)
 $log.sev_threshold = Logger::INFO
 
-# Load all tests 
+# Load all tests
 Dir['./tests/tc*.rb'].each { |file| $log.info("Loading tests from: #{file}"); require file }

@@ -1,127 +1,194 @@
-------------------------------------------------------
-Create Card Test Case 1: Create valid card with minimal input
-------------------------------------------------------
-	Prerequisites:
-		1. Create User (passing in token)
-		2. Create CardProduct (passing in token, name, start_date, and config.fulfillment.shipping.recipient_address)
+###########################################################################################
+# Create Card Test Case 1: Create valid card with minimal input
+# 	Prerequisites:
+# 		1. Create User (passing in token)
+# 		2. Create CardProduct (passing in token, name, start_date, and config.fulfillment.shipping.recipient_address)
+#
+# 	Steps:
+# 		1. Create Card (passing in user_token from prereqs and card_product_token from prereqs)
+#
+# 	Expected:
+# 		- HTTP response 201
+# 		- user_token in response matches one passed in
+# 		- card_product_token in response matches one passed in
+# 		- expiration matches today's month and year+4 in the format 'MMYY' => '0324'
+# 		- pin_is_set is false
+# 		- state is 'UNACTIVATED'
+# 		- state_reason is 'New card'
+# 		- fulfillment_status is 'ISSUED'
+# 		- instrument_type is 'PHYSICAL_MSR'
+# 		- expedite is false
+###########################################################################################
 
-	Steps:
-		1. Create Card (passing in user_token from prereqs and card_product_token from prereqs)
-		
-	Expected:
-		- HTTP response 201
-		- user_token in response matches one passed in
-		- card_product_token in response matches one passed in
-		- expiration matches today's month and year+4 in the format 'MMYY' => '0324'
-		- pin_is_set is false
-		- state is 'UNACTIVATED'
-		- state_reason is 'New card'
-		- fulfillment_status is 'ISSUED'
-		- instrument_type is 'PHYSICAL_MSR'
-		- expedite is false
-				
-------------------------------------------------------
-Create Card Test Case 2: Verify idempotency
-------------------------------------------------------
-	Prerequisites:
-		1. Create User (passing in token)
-		2. Create CardProduct (passing in token, name, start_date, and config.fulfillment.shipping.recipient_address)
+###########################################################################################
+# Create Card Test Case 2: Verify idempotency
+# 	Prerequisites:
+# 		1. Create User (passing in token)
+# 		2. Create CardProduct (passing in token, name, start_date, and config.fulfillment.shipping.recipient_address)
+#
+# 	Steps:
+# 		1. Create Card (passing in token, user_token from prereqs, card_product_token from prereqs)
+# 		2. Repeat step 1
+#
+# 	Expected:
+# 		- HTTP response 201
+# 		- user_token in response matches one passed in
+# 		- card_product_token in response matches one passed in
+# 		- expiration matches today's month and year+4 in the format 'MMYY' => '0324'
+# 		- pin_is_set is false
+# 		- state is 'UNACTIVATED'
+# 		- state_reason is 'New card'
+# 		- fulfillment_status is 'ISSUED'
+# 		- instrument_type is 'PHYSICAL_MSR'
+# 		- expedite is false
+###########################################################################################
 
-	Steps:
-		1. Create Card (passing in user_token from prereqs and card_product_token from prereqs)
-		2. Repeat step 1
-		
-	Expected:
-		- HTTP response 201
-		- user_token in response matches one passed in
-		- card_product_token in response matches one passed in
-		- expiration matches today's month and year+4 in the format 'MMYY' => '0324'
-		- pin_is_set is false
-		- state is 'UNACTIVATED'
-		- state_reason is 'New card'
-		- fulfillment_status is 'ISSUED'
-		- instrument_type is 'PHYSICAL_MSR'
-		- expedite is false
-			
-------------------------------------------------------
-Create Card Test Case 3: invalid user_token
-------------------------------------------------------
-	Prerequisites:
-		1. Create CardProduct (passing in token, name, start_date, and config.fulfillment.shipping.recipient_address)
+###########################################################################################
+#Create Card Test Case 3: invalid user_token
+###########################################################################################
+#	Prerequisites:
+#		1. Create CardProduct (passing in token, name, start_date, and config.fulfillment.shipping.recipient_address)
+#
+#	Steps:
+#		1. Create Card (passing in invalid user_token and card_product_token from prereqs)
+#		2. Repeat step 1
+#
+#	Expected:
+#		- HTTP response 400
+#		- error_code = '400010'
+#		- error_message = 'Expected create_card to succeed'
+###########################################################################################
 
-	Steps:
-		1. Create Card (passing in invalid user_token and card_product_token from prereqs)
-		2. Repeat step 1
-		
-	Expected:
-		- HTTP response 400
-		- error_code = '400010'
-		- error_message = 'Cardholder not found'
-		
-------------------------------------------------------
-Create Card Test Case 4: invalid bulk_issuance_token
-------------------------------------------------------
-	Prerequisites:
-		1. Create User (passing in token)
-		2. Create CardProduct (passing in token, name, start_date, and config.fulfillment.shipping.recipient_address)
+###########################################################################################
+#Create Card Test Case 4: invalid bulk_issuance_token
+###########################################################################################
+#	Prerequisites:
+#		1. Create User (passing in token)
+#		2. Create CardProduct (passing in token, name, start_date, and config.fulfillment.shipping.recipient_address)
+#
+#	Steps:
+#		1. Create Card (passing in invalid bulk_issuance_token, user_token from prereqs and card_product_token from prereqs)
+#
+#	Expected:
+#		- HTTP response 400
+#		- error_code = '404160'
+#		- error_message = 'Bulk issuance request not found'
+###########################################################################################
 
-	Steps:
-		1. Create Card (passing in invalid bulk_issuance_token, user_token from prereqs and card_product_token from prereqs)
-		
-	Expected:
-		- HTTP response 400
-		- error_code = '404160'
-		- error_message = 'Bulk issuance request not found'		
-		
-------------------------------------------------------
-Create Card Test Case 5: Create Digitally presented card
-------------------------------------------------------
-	Prerequisites:
-		1. Create User (passing in token)
-		2. Create CardProduct (passing in token, name, start_date, and config.fulfillment.shipping.recipient_address)
+###########################################################################################
+#Create Card Test Case 5: Create Digitally presented card
+###########################################################################################
+#	Prerequisites:
+#		1. Create User (passing in token)
+#		2. Create CardProduct (passing in token, name, start_date, and config.fulfillment.shipping.recipient_address)
+#
+#	Steps:
+#		1. Create Card with query params show_pan and show_cvv_number = true (passing in user_token from prereqs and card_product_token from prereqs)
+#
+#	Expected:
+#		- HTTP response 201
+#		- user_token in response matches one passed in
+#		- card_product_token in response matches one passed in
+#		- expiration matches today's month and year+4 in the format 'MMYY' => '0324'
+#		- pin_is_set is false
+#		- state is 'UNACTIVATED'
+#		- state_reason is 'New card'
+#		- fulfillment_status is 'DIGITALLY_PRESENTED'
+#		- instrument_type is 'PHYSICAL_MSR'
+#		- expedite is false
+###########################################################################################
 
-	Steps:
-		1. Create Card with query params show_pan and show_cvv_number = true (passing in user_token from prereqs and card_product_token from prereqs)
-		
-	Expected:
-		- HTTP response 201
-		- user_token in response matches one passed in
-		- card_product_token in response matches one passed in
-		- expiration matches today's month and year+4 in the format 'MMYY' => '0324'
-		- pin_is_set is false
-		- state is 'UNACTIVATED'
-		- state_reason is 'New card'
-		- fulfillment_status is 'DIGITALLY_PRESENTED'
-		- instrument_type is 'PHYSICAL_MSR'
-		- expedite is false		
-		
-------------------------------------------------------
-Transactions Test Case 1: Retrieve list of transactions for user without a card
-------------------------------------------------------
-	Prerequisites:
-		1. Create User (passing in token)
+###########################################################################################
+#Create Card Test Case 6: invalid token greater than 36 char
+###########################################################################################
+#	Prerequisites:
+#		1. Create User (passing in token)
+#		2. Create CardProduct (passing in token, name, start_date, and config.fulfillment.shipping.recipient_address)
+#
+#	Steps:
+#		1. Create Card (passing in invalid token, user_token from prereqs and card_product_token from prereqs)
+#
+#	Expected:
+#		- HTTP response 400
+#		- error_code = '400001'
+#		- error_message = 'Invalid input(s): token size must be between 1 and 36'
+###########################################################################################
 
-	Steps:
-		1. Retrieve transactions (passing in user_token from prereqs)
-		
-	Expected:
-		- HTTP response 200
-		- count = 0	
-		
-------------------------------------------------------
-Transactions Test Case 2: Retrieve list of transactions for user with a card and simulated transactions
-------------------------------------------------------
-	Prerequisites:
-		1. Create User (passing in token)
-		2. Create CardProduct (passing in token, name, start_date, and config.fulfillment.shipping.recipient_address)
-		3. Create a Funding source
-		4. Create a GPA Order (passing in user_token from user and funding_source_token from funding source)
-		5. Create active Card (passing in user_token from user and card_product_token from card product)
-		6. Simulate 1 financial (passing in token from card)
+###########################################################################################
+#Create Card Test Case 7: invalid token 0 char
+###########################################################################################
+#	Prerequisites:
+#		1. Create User (passing in token)
+#		2. Create CardProduct (passing in token, name, start_date, and config.fulfillment.shipping.recipient_address)
+#
+#	Steps:
+#		1. Create Card (passing in invalid token, user_token from prereqs and card_product_token from prereqs)
+#
+#	Expected:
+#		- HTTP response 400
+#		- error_code = '400001'
+#		- error_message = 'Invalid input(s): token size must be between 1 and 36'
+###########################################################################################
 
-	Steps:
-		1. Retrieve transactions (passing in user_token from prereqs)
-		
-	Expected:
-		- HTTP response 200
-		- count = 2		
+###########################################################################################
+#Create Card Test Case 8: Invalid with empty fulfillment
+###########################################################################################
+#	Prerequisites:
+#		1. Create User (passing in token)
+#		2. Create CardProduct (passing in token, name, start_date, and config.fulfillment.shipping.recipient_address)
+#
+#	Steps:
+#		1. Create Card (passing in empty fulfillment object, user_token from prereqs and card_product_token from prereqs)
+#
+#	Expected:
+#		- HTTP response 400
+###########################################################################################
+
+###########################################################################################
+#Create Card Test Case 9: Invalid with only shipping defined in fulfillment object
+###########################################################################################
+#	Prerequisites:
+#		1. Create User (passing in token)
+#		2. Create CardProduct (passing in token, name, start_date, and config.fulfillment.shipping.recipient_address)
+#
+#	Steps:
+#		1. Create Card (passing in fulfillment object defining shipping only, user_token from prereqs and card_product_token from prereqs)
+#
+#	Expected:
+#		- HTTP response 400
+###########################################################################################
+
+
+
+###########################################################################################
+#Transactions Test Case 1: Retrieve list of transactions for user without a card
+###########################################################################################
+#	Prerequisites:
+#		1. Create User (passing in token)
+#
+#	Steps:
+#		1. Retrieve transactions (passing in user_token from prereqs)
+#
+#	Expected:
+#		- HTTP response 200
+#		- count = 0
+###########################################################################################
+
+###########################################################################################
+#Transactions Test Case 2: Retrieve list of transactions for user with a card and simulated transactions
+###########################################################################################
+#	Prerequisites:
+#		1. Create User (passing in token)
+#		2. Create CardProduct (passing in token, name, start_date, and config.fulfillment.shipping.recipient_address)
+#		3. Create a Funding source
+#		4. Create a GPA Order (passing in user_token from user and funding_source_token from funding source)
+#		5. Create active Card (passing in user_token from user and card_product_token from card product)
+#		6. Simulate 1 financial (passing in token from card)
+#
+#	Steps:
+#		1. Retrieve transactions (passing in user_token from prereqs)
+#
+#	Expected:
+#		- HTTP response 200
+#		- count = 2
+###########################################################################################

@@ -1,17 +1,20 @@
+BUG 1:
+
 Quick Start mentions /fundingsources/program but links to wrong page
 
 In the Quick Start Guide under "Create a program funding source" (https://www.marqeta.com/docs/developer-guides/core-api-quick-start#_create_a_program_funding_source) it mentions an api "/fundingsources/program" with a link to Account Holder Funding Sources (https://www.marqeta.com/docs/core-api/account-holder-funding-sources), however there is no API matching /fundingsources/program there.  Instead, the link should point to Program Funding Sources (https://www.marqeta.com/docs/core-api/program-funding-sources)
 
 ------------------------------------------------
+BUG 2:
 
 Creating card with show_cvv_number and show_pan set to true doesn't set fulfillment state to DIGITALLY_PRESENTED
 
 https://www.marqeta.com/docs/core-api/cards#_query_parameters
-You can use optional query parameters to show the PAN and CVV2 number in the response. If show_pan and show_cvv_number are set to true, the fulfillment state of the card is DIGITALLY_PRESENTED instead of the normal initial state of ISSUED; this fulfillment state does not affect the delivery of physical cards.  
+You can use optional query parameters to show the PAN and CVV2 number in the response. If show_pan and show_cvv_number are set to true, the fulfillment state of the card is DIGITALLY_PRESENTED instead of the normal initial state of ISSUED; this fulfillment state does not affect the delivery of physical cards.
 
 Based on the text above, I have created a card with both those values set to true.  I can see in the response, that I am seeing the full values of pan and cvv_number, however fulfillment state is still showing as ISSUED, and not DIGITALLY_PRESENTED.
 
-I'm assuming there is something I'm missing, but there's always the possibility of a bug (either doc, or code), so I figured I'd ask.  
+I'm assuming there is something I'm missing, but there's always the possibility of a bug (either doc, or code), so I figured I'd ask.
 
 Repro with curl below:
 
@@ -19,3 +22,10 @@ curl --location --request POST 'https://sandbox-api.marqeta.com/v3/cards?show_cv
 --header 'Content-Type: application/json' \
 --header 'Authorization: Basic YzM3NmY4NDUtZWQyYS00YjU5LTg0YTUtNTgxYjdkMmIzNzYzOjNiMWZhYWU5LTcwZDUtNGQxMC04MGFjLWY5NWRlOTNkOGEyZg==' \
 --data-raw '{"user_token":"TestUser1583538271.22871","card_product_token":"TestCardProduct1583538271.22874"}'
+
+------------------------------------------------
+BUG 3:
+
+Creating card with a missing 'card_personalization' in fulfillment object succeeds
+
+According to the docs here https://www.marqeta.com/docs/core-api/cards#_the_fulfillment_object the card_personalization field is required.  I would expect that if I were to pass in an empty fulfillment object (or a fulfillment object containing only the option shipping object), that this would cause an error.  It instead succeeds.
