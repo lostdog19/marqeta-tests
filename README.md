@@ -34,7 +34,7 @@ To execute the tests from the command line and save the output in JUnit format (
 
 **test_base.rb** - A base class which all the test cases inherit from, in order to ensure common behavior.
 
-**marqeta_api_data\** - Files containing the API definitions used in the tests
+**marqeta_api_data** - Files containing the API definitions used in the tests
 
-**tests\** - Files containing the tests
+**tests** - Files containing the tests
 
