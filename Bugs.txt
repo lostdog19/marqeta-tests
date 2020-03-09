@@ -29,3 +29,14 @@ BUG 3:
 Creating card with a missing 'card_personalization' in fulfillment object succeeds
 
 According to the docs here https://www.marqeta.com/docs/core-api/cards#_the_fulfillment_object the card_personalization field is required.  I would expect that if I were to pass in an empty fulfillment object (or a fulfillment object containing only the option shipping object), that this would cause an error.  It instead succeeds.
+
+------------------------------------------------
+BUG 4:
+
+Docs for Create direct deposit account have wrong headers
+
+In the docs for creating direct deposit account, there is a header for query parameters (https://www.marqeta.com/docs/core-api/direct-deposits#_query_parameters) but then it lists the request body fields.  
+
+I would expect that instead of "Query Parameters" this should show "Body field details" as it does elsewhere in the docs.
+
+Also applies to https://www.marqeta.com/docs/core-api/direct-deposits#_create_direct_deposit_account_transition
