@@ -1,0 +1,9 @@
+{
+	"create_card_product": {
+		"action": "post", 
+		"endpoint": "cardproducts",
+		"fields": [
+			"token", "name", "active", "start_date", "end_date", "config"
+		]
+	}
+}

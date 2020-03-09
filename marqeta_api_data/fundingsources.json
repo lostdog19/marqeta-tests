@@ -1,0 +1,9 @@
+{
+	"create_funding_source": {
+		"action": "post", 
+		"endpoint": "fundingsources/program",
+		"fields": [
+			"name", "token", "active"
+		]
+	}
+}

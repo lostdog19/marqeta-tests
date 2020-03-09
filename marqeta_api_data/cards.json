@@ -1,0 +1,19 @@
+{
+	"create_card": {
+		"action": "post",
+		"endpoint": "cards",
+		"fields": [
+			"token", "user_token", "fulfillment", "reissue_pan_from_card_token", 
+			"translate_pin_from_card_token", "card_product_token", "bulk_issuance_token", 
+			"expedite", "expiration_offset", "activation_actions", "metadata"
+		],
+		"query_params": ["show_cvv_number", "show_pan"]
+	},
+	"list_cards_for_user": {
+		"action": "get",
+		"endpoint": "cards/user/%TOKEN%",
+		"tokens": [
+			"token"
+		]
+	}
+}

@@ -1,0 +1,11 @@
+{
+	"list_transactions": {
+		"action": "get", 
+		"endpoint": "transactions",
+		"query_params": [
+			"start_date", "end_date", "type", "state", "user_token", "business_token",
+			"acting_user_token", "card_token", "merchant_token", "campaign_token", "fields", 
+			"sort_by", "count", "start_index"
+		]
+	}
+}

@@ -1,0 +1,20 @@
+{
+	"simulate_authorization": {
+		"action": "post", 
+		"endpoint": "simulate/authorization",
+		"fields": [
+			"card_token", "amount", "mid", "pin", "is_pre_auth", "cash_back_amount", 
+			"transaction_options", "card_acceptor", "webhook", "card_options", "transaction_options",
+			"network_fees"
+			
+		]
+	},
+	"simulate_financial": {
+		"action": "post", 
+		"endpoint": "simulate/financial",
+		"fields": [
+			"amount", "mid", "card_token", "pin", "is_pre_auth", "cash_back_amount", 
+			"transaction_options", "card_acceptor", "webhook"
+		]
+	}
+}

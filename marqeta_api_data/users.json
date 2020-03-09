@@ -1,0 +1,12 @@
+{
+	"create_user": {
+		"action": "post", 
+		"endpoint": "users",
+		"fields": [
+			"token", "honorific", "gender", "email", "address1", "address2", "city", "state",
+			"postal_code", "country", "metadata", "nationality", "notes", "phone", "middle_name",
+			"first_name", "birth_date", "last_name", "uses_parent_account", "parent_token",
+			"password", "company", "ip_address", "account_holder_group_token", "identifications"
+		]
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"create_gpa_order": {
+		"action": "post", 
+		"endpoint": "gpaorders",
+		"fields": [
+			"token", "user_token", "business_token", "amount", "currency_code", "funding_source_token",
+			"funding_source_address_token", "tags", "memo", "fees"			
+		]
+	}
+}
